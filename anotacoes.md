@@ -144,3 +144,63 @@ return (
   <Button onPress={handleStart}></Button>
 )
 ```
+
+### TERCEIRO DIA
+
+#### NOTCH DO IPHONE
+
+Pacote para ajudar com o espaço ocupado pelo notch no iphone
+
+`npm i react-native-iphone-x-helper --save`
+
+#### JSON SERVER
+
+Pacote para criar uma api fake [🔗(link da documentação)](https://github.com/typicode/json-server)
+
+`npm i -g json-server`
+
+```
+### Como usar no terminal
+
+json-server <caminho até o arqiuvo .json> --host <ip da máquina> --port <porta>
+
+### Exemplo:
+
+json-server ./src/services/server.json --host 192.168.15.12 --port 3333
+```
+
+#### COMO USAR SVG
+
+[🔗 Documentação](https://docs.expo.io/versions/latest/sdk/svg/)
+
+`expo install react-native-svg`
+
+Exemplo de uso:
+
+```
+import { SvgFromUri } from 'react-native-svg'
+
+<SvgFromUri uri={uri}/>
+```
+
+#### SITE COM ANIMAÇÕES DE CARREGAMENTO
+
+[🔗 https://lottiefiles.com](https://lottiefiles.com/)
+
+[🔗 Documentação do expo lottie](https://docs.expo.io/versions/latest/sdk/lottie/)
+
+`expo install lottie-react-native`
+
+Exemplo de uso:
+
+```
+import LottieView from 'lottie-react-native'
+import loadAnimation from '../assets/load.json' // arquivo baixado no site lottiefiles.com
+
+<LottieView 
+  source={loadAnimation}
+  autoPlay
+  loop
+  style={styles.animation}
+/>
+```
