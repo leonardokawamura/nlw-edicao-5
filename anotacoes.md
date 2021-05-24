@@ -204,3 +204,122 @@ import loadAnimation from '../assets/load.json' // arquivo baixado no site lotti
   style={styles.animation}
 />
 ```
+
+### QUARTO DIA
+
+#### ASYNC STORAGE
+
+[🔗 Documentação do expo async storage](https://docs.expo.io/versions/latest/sdk/async-storage/)
+
+`expo install @react-native-async-storage/async-storage`
+
+Exemplo de uso:
+
+```
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+AsyncStorage.setItem('@plantmanager:user', name)
+```
+
+Padrão para nomear a chave que irá armazenar o valor: `@<nome-do-app>:<chave>`
+
+Exemplo: @plantmanager:user
+
+#### PASSANDO PARÂMETROS ENTRE AS TELAS
+
+Passando os parâmetros:
+
+```
+navigation.navigate('<page-name>', { <params> });
+```
+
+Capturando os parâmetros passados:
+
+```
+import { useRoute } from '@react-navigation/core'
+
+const route = useRoute()
+const { <param> } = route.params
+```
+
+#### DATE TIME PICKER
+
+[🔗 Documentação do expo date time picker](https://docs.expo.io/versions/latest/sdk/date-time-picker/)
+
+`expo install @react-native-community/datetimepicker`
+
+Exemplo de uso:
+
+```
+import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
+
+<DateTimePicker 
+  value=
+  mode="time"
+  display="spinner"
+  onChange=
+/>
+```
+
+#### DATE FNS
+
+Biblioteca para trabalhar com datas
+
+[🔗 Documentação do date-fns](https://date-fns.org/docs/Getting-Started)
+
+`npm install date-fns --save`
+
+Exemplo de uso:
+
+```
+format(new Date(), 'HH:mm')
+format(new Date(2014, 1, 11), 'MM/dd/yyyy')
+isBefore(date, dateToCompare)
+```
+
+#### TAB NAVIGATION
+
+[🔗 Documentação do react navigation](https://reactnavigation.org/docs/tab-based-navigation)
+
+`npm install @react-navigation/bottom-tabs`
+
+Exemplo de uso:
+
+```
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+const AppTab = createBottomTabNavigator()
+
+const AuthRoutes = () => {
+  return (
+    <AppTab.Navigator
+      tabBarOptions={{
+        activeTintColor: ,
+        inactiveTintColor: ,
+        labelPosition: 'beside-icon',
+        style: {
+          paddingVertical: 20,
+          height: 80
+        }
+      }}
+    >
+      <AppTab.Screen 
+        name="Nova Planta"
+        component={}
+        options={{
+          tabBarIcon: (({ size, color }) => (
+            <MaterialIcons 
+              name="add-circle-outline"
+              size={size}
+              color={color}
+            />
+          ))
+        }}
+      />
+
+    </AppTab.Navigator>
+  )
+}
+
+export default AuthRoutes
+```
