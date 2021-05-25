@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, Alert } from 'react-native'
 import { Header } from '../components/Header'
-import { loadPlants, PlantProps } from '../libs/storage'
+import { loadPlants, PlantProps, removePlant } from '../libs/storage'
 import { PlantCardSecondary } from '../components/PlantCardSecondary'
 import { formatDistance } from 'date-fns'
 import { pt } from 'date-fns/locale'
@@ -16,8 +16,26 @@ export function MyPlants() {
   const [loading, setLoading] = useState(true)
   const [nextWatered, setNextWatered] = useState<string>()
 
-  function handlePlantSelect(plant: PlantProps) {
-    
+  function handleRemove(plant: PlantProps) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}`, [
+      {
+        text: 'Não 🙏',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😢',
+        onPress: async () => {
+          try {
+            await removePlant(plant)
+            setPlants((oldPlants) => {
+              return oldPlants.filter((item) => item.id !== plant.id)
+            })
+          } catch (error) {
+            Alert.alert('Infelizmente houve um erro na remoção dessa planta, tente novamente!')
+          }
+        }
+      }
+    ])
   }
 
   useEffect(() => {
@@ -62,16 +80,20 @@ export function MyPlants() {
         <Text style={styles.plantsTitle}>
           Próximas regadas
         </Text>
-
-        <FlatList
-          data={plants}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => (
-            <PlantCardSecondary data={ item } onPress={() => handlePlantSelect(item)} />
-          )}           
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.plantList}
-        /> 
+        {
+          plants.length > 1 
+          ?
+          <FlatList
+            data={plants}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <PlantCardSecondary data={ item } handleRemove={() => handleRemove(item)} />
+            )}           
+            showsVerticalScrollIndicator={false}
+          /> 
+          :
+          <Text style={styles.noNextPlantText}>Você não possui outras plantas para regar</Text>
+        }
       </View>
     </View>
   )
@@ -112,7 +134,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.heading,
     color: colors.heading
   },
-  plantList: {
-    
+  noNextPlantText: {
+    marginTop: 25
   }
 })

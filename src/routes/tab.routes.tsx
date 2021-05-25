@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { MyPlants } from '../pages/MyPlants'
 
 import colors from '../styles/colors'
+import { Platform } from 'react-native'
 
 const AppTab = createBottomTabNavigator()
 
@@ -14,7 +15,10 @@ const AuthRoutes = () => {
       tabBarOptions={{
         activeTintColor: colors.green,
         inactiveTintColor: colors.heading,
-        labelPosition: 'beside-icon'
+        labelPosition: 'beside-icon',
+        style: {
+          paddingVertical: Platform.OS == 'ios' ? 20 : 0
+        }
       }}
     >
       <AppTab.Screen 
