@@ -46,7 +46,7 @@ Será necessário também subir um servidor que irá disponibilizar o arquivo js
 
 `npx json-server ./src/services/server.json --port 3333`
 
-Também será preciso alterar o endereço de acesso a esse servidor json para que o aplicativo no seu celular possa acessar a API, altera o arquivo que se encontra dentro de: 
+Também será preciso alterar o endereço de acesso a esse servidor json para que o aplicativo no seu celular possa acessar a API, altere o arquivo que se encontra dentro de: 
 **src/services/api.tsx**
 
 ```
