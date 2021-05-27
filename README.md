@@ -42,7 +42,26 @@ Rode a aplicação:
 
 `npm run start`
 
-Irá abrir uma janela no seu navegador no endereço: `http://localhost:19002`
+Será necessário também subir um servidor que irá disponibilizar o arquivo json com as informações das plantas, abra uma outra aba no seu terminal e rode o comando:
+
+`npx json-server ./src/services/server.json --port 3333`
+
+Também será preciso alterar o endereço de acesso a esse servidor json para que o aplicativo no seu celular possa acessar a API, altera o arquivo que se encontra dentro de: 
+**src/services/api.tsx**
+
+```
+# src/services/api.tsx
+
+const api = axios.create({
+  baseURL: 'http://<ip-local-da-sua-maquina>:3333'
+})
+
+# No lugar de <ip-local-da-sua-maquina> coloque o IP da sua máquina
+```
+
+
+
+Agora acesse no seu navegador o endereço: `http://localhost:19002`
 
 ![alt](https://user-images.githubusercontent.com/5429870/119895627-61715300-bf14-11eb-8010-7ef3a8698095.png)
 
