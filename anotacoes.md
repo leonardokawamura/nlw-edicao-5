@@ -1,4 +1,4 @@
-### PRIMEIRO DIA
+### 1️⃣ PRIMEIRO DIA
 
 [Documentação](https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html)
 
@@ -11,9 +11,9 @@ declare module '*.png' {
 }
 ```
 
-### SEGUNDO DIA
+### 2️⃣ SEGUNDO DIA
 
-#### COMO USAR ICONES DO EXPO
+#### 🏷️ COMO USAR ICONES DO EXPO
 
 Pacote de icones do expo [🔗(link da documentação)](https://docs.expo.io/guides/icons/)
 
@@ -29,13 +29,13 @@ import { Feather } from '@expo/vector-icons';
 <Feather name="chevron-right"/>
 ```
 
-#### COMO USAR GOOGLE FONTS
+#### 🏷️ COMO USAR GOOGLE FONTS
 
 Pacote para usar fonts do google [🔗(link da documentação)](https://docs.expo.io/guides/using-custom-fonts/)
 
 `expo install expo-font @expo-google-fonts/<nome da fonte>`
 
-#### APP LOADING
+#### 🏷️ APP LOADING
 
 Pacote para tela de loading do app
 
@@ -65,7 +65,7 @@ export default function App() {
 }
 ```
 
-#### NAVEGAÇÃO ENTRE AS PÁGINAS
+#### 🏷️ NAVEGAÇÃO ENTRE AS PÁGINAS
 
 Pacote para navegação entre as páginas [🔗(link da documentação)](https://reactnavigation.org/)
 
@@ -145,15 +145,15 @@ return (
 )
 ```
 
-### TERCEIRO DIA
+### 3️⃣ TERCEIRO DIA
 
-#### NOTCH DO IPHONE
+#### 🏷️ NOTCH DO IPHONE
 
 Pacote para ajudar com o espaço ocupado pelo notch no iphone
 
 `npm i react-native-iphone-x-helper --save`
 
-#### JSON SERVER
+#### 🏷️ JSON SERVER
 
 Pacote para criar uma api fake [🔗(link da documentação)](https://github.com/typicode/json-server)
 
@@ -169,7 +169,7 @@ json-server <caminho até o arqiuvo .json> --host <ip da máquina> --port <porta
 json-server ./src/services/server.json --host 192.168.15.12 --port 3333
 ```
 
-#### COMO USAR SVG
+#### 🏷️ COMO USAR SVG
 
 [🔗 Documentação](https://docs.expo.io/versions/latest/sdk/svg/)
 
@@ -183,7 +183,7 @@ import { SvgFromUri } from 'react-native-svg'
 <SvgFromUri uri={uri}/>
 ```
 
-#### SITE COM ANIMAÇÕES DE CARREGAMENTO
+#### 🏷️ SITE COM ANIMAÇÕES DE CARREGAMENTO
 
 [🔗 https://lottiefiles.com](https://lottiefiles.com/)
 
@@ -205,9 +205,9 @@ import loadAnimation from '../assets/load.json' // arquivo baixado no site lotti
 />
 ```
 
-### QUARTO DIA
+### 4️⃣ QUARTO DIA
 
-#### ASYNC STORAGE
+#### 🏷️ ASYNC STORAGE
 
 [🔗 Documentação do expo async storage](https://docs.expo.io/versions/latest/sdk/async-storage/)
 
@@ -225,7 +225,7 @@ Padrão para nomear a chave que irá armazenar o valor: `@<nome-do-app>:<chave>`
 
 Exemplo: @plantmanager:user
 
-#### PASSANDO PARÂMETROS ENTRE AS TELAS
+#### 🏷️ PASSANDO PARÂMETROS ENTRE AS TELAS
 
 Passando os parâmetros:
 
@@ -242,7 +242,7 @@ const route = useRoute()
 const { <param> } = route.params
 ```
 
-#### DATE TIME PICKER
+#### 🏷️ DATE TIME PICKER
 
 [🔗 Documentação do expo date time picker](https://docs.expo.io/versions/latest/sdk/date-time-picker/)
 
@@ -261,7 +261,7 @@ import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
 />
 ```
 
-#### DATE FNS
+#### 🏷️ DATE FNS
 
 Biblioteca para trabalhar com datas
 
@@ -277,7 +277,7 @@ format(new Date(2014, 1, 11), 'MM/dd/yyyy')
 isBefore(date, dateToCompare)
 ```
 
-#### TAB NAVIGATION
+#### 🏷️ TAB NAVIGATION
 
 [🔗 Documentação do react navigation](https://reactnavigation.org/docs/tab-based-navigation)
 
@@ -323,3 +323,81 @@ const AuthRoutes = () => {
 
 export default AuthRoutes
 ```
+
+### 5️⃣ QUINTO DIA
+
+#### 🏷️ SWIPEABLE
+
+[🔗 Documentação do swipeable](https://docs.swmansion.com/react-native-gesture-handler/docs/api/components/swipeable/)
+
+Exemplo de uso:
+
+```
+import {Swipeable } from 'react-native-gesture-handler'
+
+<Swipeable 
+  rightThreshold={80}
+  overshootRight={false}
+  renderRightActions={() => (
+    <Animated.View>
+      <View style={styles.containerButtonRemove}>
+        <RectButton
+          style={styles.buttonRemove}
+          onPress={handleRemove}
+        >
+          <Feather 
+            name="trash"
+            size={28}
+            color={colors.white}
+          />
+        </RectButton>
+      </View>
+    </Animated.View>
+  )}
+>
+  <RectButton 
+    style={styles.container}
+    {...rest}
+  >
+    <SvgFromUri uri={data.photo} width={40} height={40} />
+    <Text style={styles.plantName}>{ data.name }</Text>
+    <View style={styles.watered}>
+      <Text style={styles.text}>Regas às</Text>
+      <Text style={styles.date}>{ format(new Date(data.dateTimeNotification), 'HH:mm') }</Text>
+    </View>
+  </RectButton> 
+</Swipeable>
+
+```
+
+#### 🏷️ NOTITICATIONS
+
+[🔗 Documentação do expo notifications](https://docs.expo.io/versions/latest/sdk/notifications/)
+
+`expo install expo-notifications`
+
+Exemplo de uso:
+
+```
+import * as Notifications from 'expo-notifications'
+
+const notificationId = await Notifications.scheduleNotificationAsync({
+  content: {
+    title: 'Heeey, 🌱',
+    body: `Está na hora de cuidar da sua ${plant.name}`,
+    sound: true,
+    priority: Notifications.AndroidNotificationPriority.HIGH,
+    data: {
+      plant
+    }
+  },
+  trigger: {
+    seconds: seconds < 60 ? 60 : seconds,
+    repeats: true
+  }
+})
+```
+
+#### 🏷️ CATÁLOGO DE EMOJIS
+
+[🔗 Site do catálogo de emojis](https://emojipedia.org/)

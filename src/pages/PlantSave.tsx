@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
-import { Alert, Image, Platform, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, Platform, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SvgFromUri } from 'react-native-svg'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { useRoute } from '@react-navigation/core'
@@ -64,63 +64,68 @@ export function PlantSave() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.container}>
 
-      <View style={styles.plantInfo}>
+        <View style={styles.plantInfo}>
 
-        <SvgFromUri 
-          uri={plant.photo}
-          height={150}
-          width={150}
-        />
+          <SvgFromUri 
+            uri={plant.photo}
+            height={150}
+            width={150}
+          />
 
-        <Text style={styles.plantName}>
-          {plant.name}
-        </Text>
-
-        <Text style={styles.plantDescription}>
-          {plant.about}
-        </Text>
-
-      </View>
-
-      <View style={styles.controller}>
-
-        <View style={styles.tipContainer}>
-          <Image source={waterdrop} style={styles.tipImage} />
-          <Text style={styles.tipText}>
-            {plant.water_tips}
+          <Text style={styles.plantName}>
+            {plant.name}
           </Text>
+
+          <Text style={styles.plantDescription}>
+            {plant.about}
+          </Text>
+
         </View>
 
-        <Text style={styles.alertLabel}>
-          Escolha o melhor horário para ser lembrado
-        </Text>
+        <View style={styles.controller}>
 
-        {showDatePicker && (
-          <DateTimePicker
-            value={selectedDateTime}
-            mode="time"
-            display="spinner"
-            onChange={handleChangeTime}
-          />
-        )}
+          <View style={styles.tipContainer}>
+            <Image source={waterdrop} style={styles.tipImage} />
+            <Text style={styles.tipText}>
+              {plant.water_tips}
+            </Text>
+          </View>
 
-        {
-          Platform.OS == 'android' && (
-            <TouchableOpacity style={styles.dateTimePickerButton} onPress={handleOpenDateTimePickerForAndroid}>
-              <Text style={styles.dateTimePickerText}>
-                {`Me lembre às: ${format(selectedDateTime, 'HH:mm')}`}
-              </Text>
-            </TouchableOpacity>
-          )
-        }
+          <Text style={styles.alertLabel}>
+            Escolha o melhor horário para ser lembrado
+          </Text>
 
-        <Button title="CADASTRAR PLANTA" onPress={handleSavePlant} />
+          {showDatePicker && (
+            <DateTimePicker
+              value={selectedDateTime}
+              mode="time"
+              display="spinner"
+              onChange={handleChangeTime}
+            />
+          )}
+
+          {
+            Platform.OS == 'android' && (
+              <TouchableOpacity style={styles.dateTimePickerButton} onPress={handleOpenDateTimePickerForAndroid}>
+                <Text style={styles.dateTimePickerText}>
+                  {`Me lembre às: ${format(selectedDateTime, 'HH:mm')}`}
+                </Text>
+              </TouchableOpacity>
+            )
+          }
+
+          <Button title="CADASTRAR PLANTA" onPress={handleSavePlant} />
+
+        </View>
 
       </View>
-
-    </View>
+    </ScrollView>
   )
 }
 
